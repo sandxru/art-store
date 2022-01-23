@@ -1,5 +1,5 @@
 # Art Store Version 1.2
-- Artwork Commisions Manager for artists made with NodeJS and MySQL
+- Artwork Commisions Manager for artists made with NodeJS and MySQL.
 
 # Installation
 - Make sure NodeJS is properly installed.
