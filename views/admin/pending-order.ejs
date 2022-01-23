@@ -1,0 +1,169 @@
+<%- include("partials/header")%>
+
+    <style>
+        .img-thumbnail {
+            height: 150px;
+        }
+
+        /* #i1 {
+            margin: 10px;
+        } */
+
+        #i2 {
+            margin: 5px;
+        }
+
+        #i3 {
+            margin: 5px;
+        }
+
+        #btn-status {
+            margin-top: 30%;
+        }
+
+        #icon-status {
+            margin-top: 11%;
+        }
+    </style>
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Pending Order</h1>
+                </div><!-- /.col -->
+
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <h3 class="card-title">&zwnj;</h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="table-all-orders" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Image</th>
+                                        <th>Status</th>
+                                        <th>Method</th>
+                                        <th>Ordered Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <% orders.forEach (function(data){ %>
+
+                                        <tr>
+                                            <td width="50px" align="center">
+                                                <%= data.id %>
+                                            </td>
+
+                                            <td>
+                                                <%= data.cname %>
+                                            </td>
+
+                                            <td width="280px" align="center">
+                                                <img src="<%= data.photo%>" class="img-thumbnail">
+                                            </td>
+
+                                            <td width="180px" align="center">
+
+                                                <form method="POST" action="/admin/change-order/<%= data.id %>"
+                                                    id="frm-change-order-<%= data.id %>">
+                                                    <input type="hidden" value="<%= data.id %>" name="order_id">
+                                                </form>
+
+                                                <form method="POST" action="/admin/changet-order/<%= data.id %>"
+                                                    id="frm-changet-order-<%= data.id %>">
+                                                    <input type="hidden" value="<%= data.id %>" name="order_idt">
+                                                </form>
+
+
+                                                <% if(data.status=='c' ){ %>
+                                                    <button id="btn-status" href="javascript:void(0)"
+                                                        onclick="if(confirm('Are you sure you want to mark the order as Pending?')){$('#frm-changet-order-<%= data.id %>').submit()}"
+                                                        class="btn btn-success">Completed</button>
+                                                    <% }else{ %>
+                                                        <button id="btn-status" href="javascript:void(0)"
+                                                            onclick="if(confirm('Are you sure you want to mark the order as Completed?')){$('#frm-change-order-<%= data.id %>').submit()}"
+                                                            class="btn btn-warning">Pending</button>
+                                                        <% } %>
+                                            </td>
+
+                                            <td width="180px" align="center">
+
+                                                <% if(data.delivery=='0' ){ %>
+                                                    <button id="btn-status" href="" class="btn btn-info">Pick Up</button>
+                                                    <% } else if(data.delivery=='1' ){ %>
+                                                        <button id="btn-status" href="" class="btn btn-info">Delivery</button>
+                                                        <% } else if(data.delivery=='2' ){ %>
+                                                            <button id="btn-status" href="" class="btn btn-info">Soft Copy Only</button>
+                                                            <% } %>                                                                 
+                                            </td>
+
+                                            <td width="220px">
+                                                <%= data.createdAt %>
+                                            </td>
+
+                                            <td width="180px" align="center">
+
+                                                <!-- <a href="" class="btn btn-primary" id="i1"><i class="fa fa-eye"></i></a> -->
+
+                                                <a id="icon-status" href="/admin/edit-order/<%= data.id %>" id="i2"
+                                                    class="btn btn-warning"><i class="fa fa-edit"></i></a>
+
+
+                                                <form method="POST" action="/admin/delete-order/<%= data.id %>"
+                                                    id="frm-dlt-order-<%= data.id %>">
+                                                    <input type="hidden" value="<%= data.id %>" name="order_id">
+                                                </form>
+
+                                                <a id="icon-status" id="i3" href="javascript:void(0)"
+                                                    onclick="if(confirm('Are you sure you want to Delete the order?')){$('#frm-dlt-order-<%= data.id %>').submit()}"
+                                                    class="btn btn-danger"><i class="fa fa-trash"></i></a>
+
+
+                                            </td>
+                                        </tr>
+
+                                        <% }) %>
+                                </tbody>
+
+
+                                <tfoot>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Image</th>
+                                        <th>Status</th>
+                                        <th>Method</th>
+                                        <th>Ordered Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- /.content -->
+
+
+
+    <!-- /.content-wrapper -->
+    <%- include("partials/footer")%>
