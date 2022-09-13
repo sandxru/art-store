@@ -1,10 +1,10 @@
-# Art Store Version 1.2
-- Artwork Commisions Manager for artists made with NodeJS and MySQL.
+# Art Store
+- Artwork Commisions Management System for artists, made with NodeJS and MySQL.
 
 # Installation
 - Make sure NodeJS is properly installed.
 - Update *config/config.js* with your MySQL server details.
-- Update *routes/order.js* with Cloudinary credentials.
+- Update *routes/order.js* with your Cloudinary credentials.
 
 # Screenshots
 ![Dashboard](https://raw.githubusercontent.com/sandxru/art-store/main/screen-shots/1.png)
