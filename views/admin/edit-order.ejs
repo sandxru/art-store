@@ -1,0 +1,150 @@
+<%- include("partials/header")%>
+
+    <style>
+        .img-thumbnail {
+            height: 70px;
+            margin-bottom: 20px;
+        }
+    </style>
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Edit Order</h1>
+                </div><!-- /.col -->
+
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <h3 class="card-title">Edit Order</h3>
+                        </div>
+                        <div class="card-body">
+
+                            <form method="POST" action="/admin/edit-order/<%=order.id%>" id="form-add-order"
+                                enctype="multipart/form-data">
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>Customer Name</label>
+                                            <input type="text" class="form-control" value="<%= order.cname %>"
+                                                name="cname" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <label>Pick Up / Delivery</label>
+                                            <select class="form-control" name="dmethod">
+                                                <option <% if(order.delivery=='0' ) { %> selected <% } %>value="0">Pick Up</option>
+                                                <option <% if(order.delivery=='1' ) { %> selected <% } %>value="1">Delivery</option>
+                                                <option <% if(order.delivery=='2' ) { %> selected <% } %>value="2">Soft Copy Only</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <label>Frame</label>
+                                            <select class="form-control" name="frame">
+                                                <option <% if(order.frameID=='0' ) { %> selected <% } %> value="0">No Frame</option>
+
+                                                <option <% if(order.frameID=='1' ) { %> selected <% } %> value="1">6 x 9 | A5 - White</option>
+                                                <option <% if(order.frameID=='2' ) { %> selected <% } %> value="2">6 x 9 | A5 - Black</option>
+
+                                                <option <% if(order.frameID=='3' ) { %> selected <% } %> value="3">8 x 12 | A4 - White **</option>
+                                                <option <% if(order.frameID=='4' ) { %> selected <% } %> value="4">8 x 12 | A4 - Black</option>
+
+                                                <option <% if(order.frameID=='5' ) { %> selected <% } %> value="5">12 x 18 | A3 - White</option>
+                                                <option <% if(order.frameID=='6' ) { %> selected <% } %> value="6">12 x 18 | A3 - Black</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>Price</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">LKR</span>
+                                                </div>
+                                                <input type="number" class="form-control" name="price"
+                                                    value="<%= order.price %>" required>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                          <label>Contact Details</label>
+                                          <input type="text" class="form-control" placeholder="" value="<%= order.contact %>" name="contactf" required>
+                                        </div>
+                                      </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">Image 1</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="image"
+                                                        name="image">
+                                                    <label class="custom-file-label" for="exampleInputFile"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <img src="<%= order.photo%>" alt="" class="img-thumbnail">
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Notes</label>
+                                            <textarea class="form-control" rows="7"
+                                                name="notes"><%= order.notes %></textarea>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="btn btn-block btn-primary btn-lg">Submit</button>
+                                    </div>
+                                </div>
+
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+    <!-- /.content-wrapper -->
+    <%- include("partials/footer")%>
